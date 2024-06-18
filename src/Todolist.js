@@ -18,6 +18,10 @@ export default function Todolist() {
       setNewTask("");
     }
   }
+  function deleteTask(index) {
+    const updatedTask = task.filter((_, i) => i !== index);
+    setTask(updatedTask);
+  }
 
   return (
     <div className="Todolist">
@@ -35,10 +39,7 @@ export default function Todolist() {
         {task.map((task, index) => (
           <li key={index}>
             <span>{task}</span>
-            <FontAwesomeIcon
-              icon={faTrash}
-              onClick={() => console.log("Delete clicked")}
-            />
+            <FontAwesomeIcon icon={faTrash} onClick={() => deleteTask(index)} />
             <FontAwesomeIcon
               icon={faEdit}
               onClick={() => console.log("Edit clicked")}
