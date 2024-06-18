@@ -12,7 +12,10 @@ export default function Todolist() {
   function handleInput(event) {
     setNewTask(event.target.value);
   }
-  function addTask() {}
+  function addTask() {
+    setTask((t) => [...t, newTask]);
+    setNewTask("");
+  }
 
   return (
     <div className="Todolist">
