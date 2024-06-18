@@ -13,8 +13,10 @@ export default function Todolist() {
     setNewTask(event.target.value);
   }
   function addTask() {
-    setTask((t) => [...t, newTask]);
-    setNewTask("");
+    if (newTask.trim() !== "") {
+      setTask((t) => [...t, newTask]);
+      setNewTask("");
+    }
   }
 
   return (
