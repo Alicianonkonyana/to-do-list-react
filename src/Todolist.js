@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faTrash,
   faArrowUp,
   faArrowDown,
   faEdit,
 } from "@fortawesome/free-solid-svg-icons";
+import DeleteTask from "./DeleteTask";
+import MoveTaskUp from "./MoveTaskUp";
 export default function Todolist() {
-  const [task, setTask] = useState(["Attend a meeting", "Breakfaast", "Work"]);
+  const [task, setTask] = useState([]);
+
   const [newTask, setNewTask] = useState("");
   function handleInput(event) {
     setNewTask(event.target.value);
@@ -17,10 +19,6 @@ export default function Todolist() {
       setTask((t) => [...t, newTask]);
       setNewTask("");
     }
-  }
-  function deleteTask(index) {
-    const updatedTask = task.filter((_, i) => i !== index);
-    setTask(updatedTask);
   }
 
   return (
@@ -39,14 +37,11 @@ export default function Todolist() {
         {task.map((task, index) => (
           <li key={index}>
             <span>{task}</span>
-            <FontAwesomeIcon icon={faTrash} onClick={() => deleteTask(index)} />
+            <DeleteTask task={task} setTask={setTask} index={index} />
+            <MoveTaskUp task={task} setTask={setTask} index={index} />
             <FontAwesomeIcon
               icon={faEdit}
               onClick={() => console.log("Edit clicked")}
-            />
-            <FontAwesomeIcon
-              icon={faArrowUp}
-              onClick={() => console.log("Move up clicked")}
             />
           </li>
         ))}
